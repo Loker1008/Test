@@ -1,3 +1,0 @@
-# Test
-My testapp
-Loker

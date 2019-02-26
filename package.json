@@ -1,0 +1,30 @@
+{
+  "name": "lokertest1",
+  "version": "1.0.9",
+  "description": "test",
+  "main": "brain-games.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel-node": "babel-node",
+    "build": "NODE_ENV=production babel src --out-dir dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [],
+  "author": "Muravlev",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  },
+  "bin": {
+    "LokerApp": "dist/bin/brain-games.js"
+  }
+}
