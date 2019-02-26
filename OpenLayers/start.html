@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 800px;
+        width: 100%;
+      }
+	#svg1 {
+		position:absolute;
+		top:66px;
+pointer-events:none;
+	}	     	
+
+    </style>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    
+
+<title>OpenLayers example</title>
+  </head>
+  <body>
+    <h2>Редактор ОО</h2>
+    <div id="map" class="map">
+		
+	</div>
+
+	<svg id = "svg1" width="100%" height="800">
+<g id="gid">
+  			<circle id="circle" cx="350" cy="250" r="5" stroke="green" stroke-width="4" fill="yellow" />
+			<circle id="circle1" cx="350" cy="250" r="5" stroke="green" stroke-width="4" fill="yellow" />
+			<use id="testUSE" xlink:href="#color-wheel" id="num0" x="350" y="250"></use>
+</g>		
+			
+			<symbol id="color-wheel" stroke="red"     >
+			
+			<line x1="50" y1="75" x2="0" y2="50"  stroke-width="3"; ></line>
+			<line x1="0" y1="140" x2="0" y2="50" stroke-width="7"></line>
+			<line x1="0" y1="100" x2="50" y2="75" stroke-width="3"></line>
+			
+			</symbol>
+		</svg>
+
+
+    <script type="text/javascript">
+
+
+//outline:2px dashed #003380 - Выделение знака
+
+
+
+
+
+var signArray = new Array();
+var signCoord = new Array();
+
+
+		var lastFocus = null;
+
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([37.41, 8.82]),
+          zoom: 4
+        })
+      });
+	var oldEvt=map.focus_;
+
+function onMoveEnd(evt) {
+a=evt;
+e = map.getEventCoordinate(evt);
+c= map.getCoordinateFromPixel(evt.pixel);       
+b = map.getPixelFromCoordinate([4158274,7462400]) ;
+console.log(b );
+      }
+
+
+function lastFoc(evt) {
+lastFocus = map.focus_;
+      }
+
+function nextFoc(evt) {
+
+
+var b = map.getPixelFromCoordinate([4158274,7462400]) ;
+var obJ = document.getElementById('testUSE');
+obJ.setAttribute('x', b[0]);
+obJ.setAttribute('y', b[1]-140);
+
+
+var b = map.getPixelFromCoordinate([4158274,7462400]) ;
+var obJ = document.getElementById('circle');
+obJ.setAttribute('cx', b[0]);
+obJ.setAttribute('cy', b[1]);
+
+
+b = map.getPixelFromCoordinate([4157881.7282146835,7462838.263715489]) ;
+obJ = document.getElementById('circle1');
+obJ.setAttribute('cx', b[0]);
+obJ.setAttribute('cy', b[1]);
+
+
+for (i=0;i<signArray.length; i++){
+signCoord = signArray[i];
+
+var obJ = document.getElementById('num'+i);
+
+
+if(obJ){
+var y= map.getPixelFromCoordinate(signCoord);
+obJ.setAttribute('x', y[0]);
+obJ.setAttribute('y', y[1]-140);
+}
+
+}
+
+
+
+//var obJ = document.getElementById('gid');
+//var t = evt.frameState.coordinateToPixelTransform[4];
+//var t2 = b[0];
+//var t3 = t-t2;
+//console.log(t);
+//console.log(t2);
+//obJ.setAttribute('transform','translate('+t3+' 115)');
+      }
+
+      	map.on('click', onMoveEnd);
+	//map.on('movestart', lastFoc);
+	map.on('precompose', nextFoc);
+
+var SignNumber=0;
+
+document.onclick = function(evt) {
+
+console.log(evt);
+
+for (i=0;i<1; i++){
+ var svg   = document.getElementById('svg1');
+var gid   = document.getElementById('gid');
+    var svgNS = svg.namespaceURI;
+
+var rnd = Math.random() * (1800 - 10) + 10;
+var rnd2 = Math.random() * (1900 - 10) + 10;
+/*var circle = document.createElementNS(svgNS,'circle');
+    circle.setAttribute('id','num' + SignNumber);
+    circle.setAttribute('cx',rnd); //БЫЛО rnd
+    circle.setAttribute('cy',rnd2); //БЫЛО rnd2
+    circle.setAttribute('r',5);
+    circle.setAttribute('stroke',5);
+    gid.appendChild(circle);
+    document.body.appendChild(svg); */
+
+var svg = document.getElementById('svg1');
+var gid = document.getElementById('gid');
+var  xlinkns = "http://www.w3.org/1999/xlink";
+var svgNS = svg.namespaceURI
+var circle = document.createElementNS(svgNS,'use');
+circle.setAttributeNS(xlinkns, "href", "#color-wheel");
+circle.setAttribute('id','num' + SignNumber);
+circle.setAttribute('x',rnd); //БЫЛО rnd
+circle.setAttribute('y',rnd2-200); //БЫЛО rnd2-140
+circle.style.pointerEvents = "auto";
+gid.appendChild(circle);
+//circle.onmouseover = function(){circle.style.outline="2px dashed #003380"};
+//circle.onmouseout = function(){circle.style.outline=""};
+circle.addEventListener('mouseover', eventOver);
+circle.addEventListener('mouseout', eventOut);
+circle.addEventListener('mousedown', SignDrag);
+
+
+
+
+signCoord = [rnd,rnd2];
+signCoord = map.getCoordinateFromPixel(signCoord);
+signArray[signArray.length]=signCoord;
+SignNumber++;
+
+
+}
+}
+
+
+function eventOver(circle){
+var po = circle.path[0];
+console.log(po);
+po.style.outline="2px dashed #003380";
+}
+
+var eventOut = function(circle){
+var po = circle.path[0];
+console.log(po);
+po.style.outline="";
+}
+
+function SignDrag(e){
+
+var MapHideElement = document.getElementsByClassName("ol-viewport");
+ MapHideElement[0].style.pointerEvents="none";
+
+
+var po = e.path[0];
+console.log(po);
+//po.setAttribute('x', circle.pageX);
+//po.setAttribute('y', circle.pageY-140);
+
+	function moveSign(e){
+	
+	console.log("ПОШЛО ДЕЛО");
+	po.setAttribute('x', e.offsetX);
+	po.setAttribute('y', e.offsetY-120);
+		}
+document.onmousemove = function(e) {
+    moveSign(e);
+  };
+document.onmouseup = function(){
+ document.onmousemove = null;
+ MapHideElement[0].style.pointerEvents="auto";
+    //ball.onmouseup = null;
+}
+
+}
+
+
+
+
+
+
+
+
+	    </script>
+  </body>
+</html>
