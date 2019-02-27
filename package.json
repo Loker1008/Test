@@ -1,8 +1,8 @@
 {
   "name": "lokertest1",
-  "version": "1.0.9",
+  "version": "1.0.12",
   "description": "test",
-  "main": "brain-games.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node",
@@ -25,6 +25,6 @@
     "readline-sync": "^1.4.9"
   },
   "bin": {
-    "LokerApp": "dist/bin/brain-games.js"
+    "brain-games": "dist/bin/brain-games.js"
   }
 }
