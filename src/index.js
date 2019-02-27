@@ -1,7 +1,7 @@
 import readlineSync from 'readline-sync';
 
 
-export function askQuest(){
-console.log('May I have your name? John');
+export function askQuestion(){
+console.log('May I have your name?');
 const actual = readlineSync.question('Hello, ');
 }
