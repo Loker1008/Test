@@ -11,7 +11,5 @@ start:
 build:
 	npm run build
 
-test:
-	npm run test
 lint:
-	npx eslint .
+	npx eslint ./
