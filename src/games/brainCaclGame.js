@@ -2,10 +2,9 @@ import readlineSync from 'readline-sync';
 import { createRndNumber, createRndOperator } from '../lib/rndFunctions';
 
 const startSecondGame = () => {
-  let isRight;
-  const firstRndNumber = parseInt(createRndNumber(), 10);
-  const secondRndNumber = parseInt(createRndNumber(), 10);
-  const rndOperator = parseInt(createRndOperator(), 10);
+  const firstRndNumber = createRndNumber();
+  const secondRndNumber = createRndNumber();
+  const rndOperator = createRndOperator();
   let visualOperator;
   let rezult;
 
@@ -26,9 +25,9 @@ const startSecondGame = () => {
   }
 
   const cliResponse = readlineSync.question(`Question: ${firstRndNumber} ${visualOperator} ${secondRndNumber}\n`);
-  isRight = (rezult === parseInt(cliResponse, 10)) ? isRight = true : isRight = false;
+  const isRightResponse = (rezult === parseInt(cliResponse, 10));
 
-  if (isRight) {
+  if (isRightResponse) {
     console.log('Correct!');
     return true;
   }

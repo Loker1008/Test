@@ -2,13 +2,12 @@ import readlineSync from 'readline-sync';
 import { createRndNumber } from '../lib/rndFunctions';
 
 const startFirstGame = () => {
-  let isRight;
   const rndNumber = createRndNumber();
   const cliResponse = readlineSync.question(`Question: ${rndNumber}\n`);
 
-  isRight = (rndNumber % 2 === 0) ? isRight = true : isRight = false;
+  const isRightResponse = (rndNumber % 2 === 0);
 
-  if ((cliResponse === 'yes' && isRight) || (cliResponse === 'no' && !isRight)) {
+  if ((cliResponse === 'yes' && isRightResponse) || (cliResponse === 'no' && !isRightResponse)) {
     console.log('Correct!');
     return true;
   }
