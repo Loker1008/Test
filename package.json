@@ -1,6 +1,6 @@
 {
   "name": "lokertest1",
-  "version": "1.0.17",
+  "version": "1.0.21",
   "description": "test",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
     "readline-sync": "^1.4.9"
   },
   "bin": {
-    "brain-even": "dist/bin/brain-even.js"
+    "brain-even": "dist/bin/brain-even.js",
+    "brain-calc": "dist/bin/brain-calc.js"
   }
 }
