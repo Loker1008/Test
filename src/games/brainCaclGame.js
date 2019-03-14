@@ -13,19 +13,25 @@ const makeCalculation = (operatorInt, firstNumber, secondNumber) => {
   }
 };
 
-const startSecondGame = () => {
+const answerVerification = (cliResp, isRightAnswer, calc) => {
+  if (isRightAnswer) {
+    return { isRightAnswer: true, message: 'Correct!' };
+  }
+  return { isRightAnswer: false, message: `'${cliResp}' is wrong answer ;(. Correct answer was '${calc.result}'.` };
+};
+
+const gameDescription = 'What is the result of the expression?';
+
+const start = () => {
   const firstRndNumber = createRndNumber();
   const secondRndNumber = createRndNumber();
-  const rndOperator = createRndOperator();
-  const calculate = makeCalculation(rndOperator, firstRndNumber, secondRndNumber);
+  const operatorInt = createRndOperator();
+  const calculate = makeCalculation(operatorInt, firstRndNumber, secondRndNumber);
 
   const cliResponse = readlineSync.question(`Question: ${firstRndNumber} ${calculate.visualOperator} ${secondRndNumber}\n`);
   const isRightResponse = (calculate.result === parseInt(cliResponse, 10));
 
-  if (isRightResponse) {
-    return { isRightAnswer: true, message: 'Correct!' };
-  }
-  return { isRightAnswer: false, message: `'${cliResponse}' is wrong answer ;(. Correct answer was '${calculate.result}'.` };
+  return answerVerification(cliResponse, isRightResponse, calculate);
 };
 
-export default startSecondGame;
+export { start, gameDescription };
