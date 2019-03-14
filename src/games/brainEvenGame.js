@@ -10,7 +10,7 @@ const startFirstGame = () => {
   if ((cliResponse === 'yes' && isRightResponse) || (cliResponse === 'no' && !isRightResponse)) {
     return { isRightAnswer: true, message: 'Correct!' };
   }
-  return { isRigthAnswer: false, message: `'${cliResponse}' is wrong answer ;(. Correct answer was '${cliResponse === 'yes' ? 'no' : 'yes'}'.` };
+  return { isRigthAnswer: false, message: `'${cliResponse}' is wrong answer ;(. Correct answer was '${isRightResponse ? 'yes' : 'no'}'.` };
 };
 
 export default startFirstGame;
