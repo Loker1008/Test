@@ -1,6 +1,7 @@
 import readlineSync from 'readline-sync';
 
 export default function (game) {
+  const GAME_STEPS = 2;
   console.log('Welcome to the Brain Games!');
   console.log(`${(game === 'first') ? 'Answer "yes" if number even otherwise answer "no".\n' : 'What is the result of the expression?\n'}`);
 
@@ -8,18 +9,20 @@ export default function (game) {
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!`);
 
-  const startGame = (gameCount) => {
-    if (gameCount === 0) {
-      console.log(`Congratulations, ${userName}!`);
-      return false;
-    }
-    const isRightAnswer = game();
-    if (!isRightAnswer) {
+  const gameIter = (gameStep) => {
+    const response = game();
+    if (!response.isRightAnswer) {
+      console.log(response.message);
       console.log(`Let's try again, ${userName}`);
       return 0;
     }
-    return startGame(gameCount - 1);
+    if (response.isRightAnswer) console.log(response.message);
+    if (gameStep === 0) {
+      console.log(`Congratulations, ${userName}!`);
+      return false;
+    }
+    return gameIter(gameStep - 1);
   };
 
-  startGame(3);
+  gameIter(GAME_STEPS);
 }

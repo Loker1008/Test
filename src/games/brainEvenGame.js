@@ -8,11 +8,9 @@ const startFirstGame = () => {
   const isRightResponse = (rndNumber % 2 === 0);
 
   if ((cliResponse === 'yes' && isRightResponse) || (cliResponse === 'no' && !isRightResponse)) {
-    console.log('Correct!');
-    return true;
+    return { isRightAnswer: true, message: 'Correct!' };
   }
-  console.log(`'${cliResponse}' is wrong answer ;(. Correct answer was '${cliResponse === 'yes' ? 'no' : 'yes'}'.`);
-  return false;
+  return { isRigthAnswer: false, message: `'${cliResponse}' is wrong answer ;(. Correct answer was '${cliResponse === 'yes' ? 'no' : 'yes'}'.` };
 };
 
 export default startFirstGame;

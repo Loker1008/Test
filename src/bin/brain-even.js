@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import askQuestion from '..';
+import startGame from '..';
 import Game from '../games/brainEvenGame';
 
-askQuestion(Game);
+startGame(Game);

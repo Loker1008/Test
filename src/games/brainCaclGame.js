@@ -6,33 +6,31 @@ const startSecondGame = () => {
   const secondRndNumber = createRndNumber();
   const rndOperator = createRndOperator();
   let visualOperator;
-  let rezult;
+  let result;
 
   switch (rndOperator) {
     case 0:
       visualOperator = '+';
-      rezult = firstRndNumber + secondRndNumber;
+      result = firstRndNumber + secondRndNumber;
       break;
     case 1:
       visualOperator = '-';
-      rezult = firstRndNumber - secondRndNumber;
+      result = firstRndNumber - secondRndNumber;
       break;
 
     default:
       visualOperator = '*';
-      rezult = firstRndNumber * secondRndNumber;
+      result = firstRndNumber * secondRndNumber;
       break;
   }
 
   const cliResponse = readlineSync.question(`Question: ${firstRndNumber} ${visualOperator} ${secondRndNumber}\n`);
-  const isRightResponse = (rezult === parseInt(cliResponse, 10));
+  const isRightResponse = (result === parseInt(cliResponse, 10));
 
   if (isRightResponse) {
-    console.log('Correct!');
-    return true;
+    return { isRightAnswer: true, message: 'Correct!' };
   }
-  console.log(`'${cliResponse}' is wrong answer ;(. Correct answer was '${rezult}'.`);
-  return false;
+  return { isRightAnswer: false, message: `'${cliResponse}' is wrong answer ;(. Correct answer was '${result}'.` };
 };
 
 export default startSecondGame;
