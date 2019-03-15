@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import startGame from '..';
-import * as gameData from '../games/brainCaclGame';
+import evenGame from '../games/brainCaclGame';
 
-startGame(gameData);
+evenGame();

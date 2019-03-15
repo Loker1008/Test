@@ -1,9 +1,9 @@
 import readlineSync from 'readline-sync';
 
-export default function (gameData) {
+export default function (gameData, gameDescription) {
   const GAME_STEPS = 3;
   console.log('Welcome to the Brain Games!');
-  console.log(gameData.gameDescription);
+  console.log(gameDescription);
   const userName = readlineSync.question('May  I have your name? ');
   console.log(`Hello, ${userName}!`);
 
@@ -12,18 +12,17 @@ export default function (gameData) {
       console.log(`Congratulations, ${userName}!`);
       return;
     }
-    const response = gameData.start();
-    const cliResponse = readlineSync.question(`${response.question}`);
+    const response = gameData();
+    const cliResponse = readlineSync.question(`Question: ${response.question} \n`);
 
 
     if (response.rightAnswer !== cliResponse) {
-      console.log(`${typeof response.rightAnswer}------------------------------`);
-      console.log(`${cliResponse} ${response.badMess}`);
+      console.log(`${cliResponse}'is wrong answer ;(. Correct answer was '${response.rightAnswer}`);
       console.log(`Let's try again, ${userName}`);
       return;
     }
     if (response.rightAnswer === cliResponse) {
-      console.log(response.goodMess);
+      console.log('Correct!');
     }
     gameIter(gameStep - 1);
   };

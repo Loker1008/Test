@@ -1,4 +1,5 @@
 import { createRndNumber, createRndOperator } from '../lib/rndFunctions';
+import startGame from '..';
 
 const makeCalculation = (operatorInt, firstNumber, secondNumber) => {
   switch (operatorInt) {
@@ -14,21 +15,19 @@ const makeCalculation = (operatorInt, firstNumber, secondNumber) => {
 
 const gameDescription = 'What is the result of the expression?';
 
-const start = () => {
+const gameData = () => {
   const firstRndNumber = createRndNumber();
   const secondRndNumber = createRndNumber();
   const operatorInt = createRndOperator();
   const calculate = makeCalculation(operatorInt, firstRndNumber, secondRndNumber);
-  const getQuestion = () => `Question: ${firstRndNumber} ${calculate.visualOperator} ${secondRndNumber}\n`;
-  const goodMessage = 'Correct!';
-  const badMessage = `is wrong answer ;(. Correct answer was '${calculate.result}'.`;
+  const getQuestion = `${firstRndNumber} ${calculate.visualOperator} ${secondRndNumber}`;
 
   return {
-    goodMess: goodMessage,
-    badMess: badMessage,
     rightAnswer: String(calculate.result),
-    question: getQuestion(),
+    question: getQuestion,
   };
 };
 
-export { start, gameDescription };
+export default () => {
+  startGame(gameData, gameDescription);
+};
