@@ -1,3 +1,3 @@
-export const createRndNumber = () => parseInt((Math.random() * 100), 10);
+export const createRndNumber = () => Math.floor((Math.random() * 100));
 
-export const createRndOperator = () => parseInt((Math.random() * 2), 10);
+export const createRndOperator = () => Math.floor((Math.random() * 2));

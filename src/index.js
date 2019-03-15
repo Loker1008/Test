@@ -4,7 +4,7 @@ export default function (gameData) {
   const GAME_STEPS = 3;
   console.log('Welcome to the Brain Games!');
   console.log(gameData.gameDescription);
-  const userName = readlineSync.question('May I have your name? ');
+  const userName = readlineSync.question('May  I have your name? ');
   console.log(`Hello, ${userName}!`);
 
   const gameIter = (gameStep) => {
@@ -13,13 +13,17 @@ export default function (gameData) {
       return;
     }
     const response = gameData.start();
-    if (!response.isRightAnswer) {
-      console.log(response.message);
+    const cliResponse = readlineSync.question(`${response.question}`);
+
+
+    if (response.rightAnswer !== cliResponse) {
+      console.log(`${typeof response.rightAnswer}------------------------------`);
+      console.log(`${cliResponse} ${response.badMess}`);
       console.log(`Let's try again, ${userName}`);
       return;
     }
-    if (response.isRightAnswer) {
-      console.log(response.message);
+    if (response.rightAnswer === cliResponse) {
+      console.log(response.goodMess);
     }
     gameIter(gameStep - 1);
   };
