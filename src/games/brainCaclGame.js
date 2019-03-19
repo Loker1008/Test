@@ -1,29 +1,39 @@
 import { createRndNumber, createRndOperator } from '../lib/rndFunctions';
 import startGame from '..';
 
-const makeCalculation = (operatorInt, firstNumber, secondNumber) => {
+const makeCalculation = () => {
+  const firstRndNumber = createRndNumber();
+  const secondRndNumber = createRndNumber();
+  const operatorInt = createRndOperator();
+
   switch (operatorInt) {
     case 0:
-      return { visualOperator: '+', result: firstNumber + secondNumber };
+      return {
+        getQuestion: `${firstRndNumber} + ${secondRndNumber}`,
+        result: firstRndNumber + secondRndNumber,
+      };
     case 1:
-      return { visualOperator: '-', result: firstNumber - secondNumber };
+      return {
+        getQuestion: `${firstRndNumber} - ${secondRndNumber}`,
+        result: firstRndNumber - secondRndNumber,
+      };
 
     default:
-      return { visualOperator: '*', result: firstNumber * secondNumber };
+      return {
+        getQuestion: `${firstRndNumber} + ${secondRndNumber}`,
+        result: firstRndNumber * secondRndNumber,
+      };
   }
 };
 
 const gameDescription = 'What is the result of the expression?';
 
 const gameData = () => {
-  const firstRndNumber = createRndNumber();
-  const secondRndNumber = createRndNumber();
-  const operatorInt = createRndOperator();
-  const calculate = makeCalculation(operatorInt, firstRndNumber, secondRndNumber);
-  const getQuestion = `${firstRndNumber} ${calculate.visualOperator} ${secondRndNumber}`;
+  const answer = makeCalculation();
+  const { getQuestion } = answer;
 
   return {
-    rightAnswer: String(calculate.result),
+    rightAnswer: String(answer.result),
     question: getQuestion,
   };
 };

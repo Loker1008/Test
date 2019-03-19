@@ -2,15 +2,12 @@ import { createRndNumber } from '../lib/rndFunctions';
 import startGame from '..';
 
 const gameDescription = 'Answer "yes" if number even otherwise answer "no".';
-
 const gameData = () => {
   const num = createRndNumber();
-  const getQuestion = `${num}`;
-  const isRightResponse = (num % 2 === 0);
-  const verificate = () => ((isRightResponse) ? 'yes' : 'no');
+  const isRightResponse = (num % 2 === 0) ? 'yes' : 'no';
   return {
-    rightAnswer: verificate(),
-    question: getQuestion,
+    rightAnswer: isRightResponse,
+    question: String(num),
   };
 };
 
