@@ -29,11 +29,11 @@ const makeCalculation = () => {
 const gameDescription = 'What is the result of the expression?';
 
 const gameData = () => {
-  const answer = makeCalculation();
-  const { getQuestion } = answer;
+  const questionData = makeCalculation();
+  const { getQuestion } = questionData;
 
   return {
-    rightAnswer: String(answer.result),
+    rightAnswer: String(questionData.result),
     question: getQuestion,
   };
 };
