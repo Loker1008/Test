@@ -21,9 +21,8 @@ export default function (gameData, gameDescription) {
       console.log(`Let's try again, ${userName}`);
       return;
     }
-    if (response.rightAnswer === cliResponse) {
-      console.log('Correct!');
-    }
+    console.log('Correct!');
+
     gameIter(gameStep - 1);
   };
 
