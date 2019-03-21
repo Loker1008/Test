@@ -1,37 +1,36 @@
 import { createRndNumber, createRndOperator } from '../lib/rndFunctions';
 import startGame from '..';
 
-const makeQuestionData = (firstRndNumber, secondRndNumber, operatorInt) => {
+const gameDescription = 'What is the result of the expression?';
+
+const makeQuestionData = () => {
+  const firstRndNumber = createRndNumber();
+  const secondRndNumber = createRndNumber();
+  const operatorInt = createRndOperator();
   if (operatorInt === 0) {
     return {
-      operator: '+',
+      question: `${firstRndNumber} + ${secondRndNumber}`,
       result: firstRndNumber + secondRndNumber,
     };
   }
   if (operatorInt === 1) {
     return {
-      operator: '-',
+      question: `${firstRndNumber} - ${secondRndNumber}`,
       result: firstRndNumber - secondRndNumber,
     };
   }
 
   return {
-    operator: '*',
+    question: `${firstRndNumber} * ${secondRndNumber}`,
     result: firstRndNumber * secondRndNumber,
   };
 };
-
-const gameDescription = 'What is the result of the expression?';
-
 const gameData = () => {
-  const firstRndNumber = createRndNumber();
-  const secondRndNumber = createRndNumber();
-  const operatorInt = createRndOperator();
-  const questionData = makeQuestionData(firstRndNumber, secondRndNumber, operatorInt);
+  const questionData = makeQuestionData();
 
   return {
     rightAnswer: String(questionData.result),
-    question: `${firstRndNumber} ${questionData.operator} ${secondRndNumber}`,
+    question: questionData.question,
   };
 };
 
