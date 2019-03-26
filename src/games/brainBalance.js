@@ -4,7 +4,7 @@ import startGame from '..';
 const MIN = 100;
 const MAX = 10000;
 
-const isBigger = (maxNumIndex, minNumIndex) => (maxNumIndex <= minNumIndex + 1);
+const isBalanced = (maxNumIndex, minNumIndex) => (maxNumIndex <= minNumIndex + 1);
 
 const makeBalance = (arr) => {
   const maxNum = Math.max.apply(null, arr);
@@ -18,19 +18,18 @@ const makeBalance = (arr) => {
     return element;
   });
 
-  if (!isBigger(maxNum, minNum)) { return makeBalance(balancedArray); }
+  if (!isBalanced(maxNum, minNum)) { return makeBalance(balancedArray); }
   return balancedArray;
 };
 
 const gameDescription = 'Balance the given number.';
 
 const gameData = () => {
-  const firstRndNumber = createMinMaxRnd(MIN, MAX);
-  const numStr = String(firstRndNumber).split('');
-  const numberArray = numStr.map(element => Number(element));
+  const rndNum = createMinMaxRnd(MIN, MAX);
+  const numberArray = String(rndNum).split('').map(element => Number(element));
 
   const result = makeBalance(numberArray).sort().join('');
-  const question = `${firstRndNumber}`;
+  const question = `${rndNum}`;
 
   return {
     rightAnswer: String(result),
