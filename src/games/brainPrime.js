@@ -1,7 +1,7 @@
 import { createMinMaxRnd } from '../lib/rndFunctions';
 import startGame from '..';
 
-const gameDescription = 'What number is missing in this progression?';
+const gameDescription = 'Is this number prime?';
 
 const MIN = 1;
 const MAX = 100;
