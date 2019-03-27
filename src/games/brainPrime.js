@@ -10,16 +10,12 @@ const isPrime = (num, counter) => {
   if (counter <= 1) {
     return true;
   }
-  if (num % counter === 0) {
-    return false;
-  }
-  return isPrime(num, counter - 1);
+  return num % counter === 0 ? false : isPrime(num, counter - 1);
 };
-
 
 const gameData = () => {
   const num = createMinMaxRnd(MIN, MAX);
-  const counter = num - 1;
+  const counter = Math.floor(num / 2);
   const answer = isPrime(num, counter);
 
   return {
