@@ -7,11 +7,12 @@ const makeElement = (progArr, progressionNum) => {
 };
 
 const createProgElements = (array, progressionStep) => {
-  array.push(makeElement(array, progressionStep));
-  if (array.length !== 10) {
-    return createProgElements(array, progressionStep);
+  const element = makeElement(array, progressionStep);
+  const newArr = [...array, element];
+  if (newArr.length !== 10) {
+    return createProgElements(newArr, progressionStep);
   }
-  return array;
+  return newArr;
 };
 
 const hideElementProgression = (array) => {
